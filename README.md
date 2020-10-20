@@ -16,5 +16,8 @@ Ce nouveau site web remplace celui qui etait conçu en JOOMLA. Il utilise des te
 # 2. Comment partiper  à ce projet ?
  * Apres la premiere etape, ouvrer un nouveau terminal, puis acceder dans le dossier ou se trouve le projet. En suite, 
  * creer votre branche en tapant la commande suivante: <strong>git branch "nom de votre branche" </strong>
- * switcher dans votre branche: <strong>git git switch "votre branche ex:toto"</strong>
+ * switcher dans votre branche: <strong>git switch "votre branche ex:toto"</strong>
  * Apporter votre contribution !
+ # NOTA:  
+ * Ne travailler pas sur la branch master .
+ * Seul le <strong>Chef du projet</strong> est autorisé. Celui qui doit faire des <strong>merges <strong> pour chaque branch
