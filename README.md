@@ -9,7 +9,7 @@ Ce nouveau site web remplace celui qui etait conçu en JOOMLA. Il utilise des te
   * Base de données : MariaDB
 
 # 1. Comment le lancer ?
- * Assurez-vous d'avoir <strong git, composer et le binaire symfony</strong> dans votre machine. Sinon installez-le .
+ * Assurez-vous d'avoir <strong> git, composer et le binaire symfony</strong> dans votre machine. Sinon installez-le .
  * ouvrer votre terminal taper le commande suivante:<br> - git clone git@github.com:NsatDevs/auCongoWebsite.git <br>
                                                      - composer install<br>
                                                      - symfony server:start
