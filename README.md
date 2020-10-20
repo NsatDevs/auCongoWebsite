@@ -1,4 +1,4 @@
-# aucongo-website-new : # Nouveau site web !
+# auCongoWebsite: # Nouveau site web !
 
 Ce nouveau site web remplace celui qui etait conçu en JOOMLA. Il utilise des technologies ci-apres:
   * Langage de programmation : PHP
