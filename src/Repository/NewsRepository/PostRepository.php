@@ -4,6 +4,7 @@ namespace App\Repository\NewsRepository;
 
 use App\Entity\NewsEntity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,23 @@ class PostRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
+    }
+
+    /**
+     * Ceci retourne les dernieres articles
+     */
+    public function findLatest(){
+        return $this->findVisibleQuery()
+                     ->setMaxResults(3)
+                     ->getQuery()
+                     ->getResult();
+    }
+    
+    private function findVisibleQuery()
+    {
+
+        return $this->createQueryBuilder('p')
+              ->where('p.posted=true');
     }
 
     // /**

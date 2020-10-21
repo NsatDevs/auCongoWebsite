@@ -36,12 +36,13 @@ class AppFixtures extends Fixture
             $category->setTitle('Technologie');
             $manager->persist($category);
 
-            $post=new Post();
-            $comment=new Comment();
-            $user=new User();
-            $like=new Like();
+            
 
              for ($i=0; $i <12 ; $i++) { 
+                    $post=new Post();
+                  
+                    $user=new User();
+                    $like=new Like();
                     $post->setTitle($faker->sentence)
                          ->setDescription($faker->paragraph)
                          ->setImageName($faker->imageUrl())
@@ -70,6 +71,7 @@ class AppFixtures extends Fixture
 
                       // 3.LES COMMENTAIRES
                          for ($j=0; $j <24 ; $j++) { 
+                             $comment=new Comment();
                             $comment->setUser($user)
                                     ->setMessage($faker->sentence)
                                     ->setPost($post);

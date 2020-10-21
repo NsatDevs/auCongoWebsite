@@ -2,7 +2,7 @@
 
 namespace App\Entity\NewsEntity;
 
-use App\Repository\LikeRepository;
+use App\Repository\NewsRepository\LikeRepository;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

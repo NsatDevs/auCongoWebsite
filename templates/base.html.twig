@@ -4,9 +4,29 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+            /* Prevents slides from flashing */
+    <style>
+        #slides {
+        display:none;
+        }
+  </style>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+            <script src="jquery.slides.min.js"></script>
+
+            <script>
+                $(function(){
+                $("#slides").slidesjs({
+                    width: 940,
+                    height: 528
+                });
+                });
+            </script>
+  
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            
+        {% endblock %}
     </body>
 </html>

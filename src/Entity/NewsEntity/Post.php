@@ -2,12 +2,13 @@
 
 namespace App\Entity\NewsEntity;
 
-use App\Repository\PostRepository;
-use App\Entity\User;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\NewsRepository\PostRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -80,6 +81,8 @@ class Post
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="posts")
      */
     private $categories;
+
+    private string $slug;
 
     public function __construct()
     {
@@ -292,4 +295,16 @@ class Post
         return $this;
     }
 
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug():?string
+    {  
+        $slug=new Slugify();
+       
+        return $slug ->slugify($this->getTitle());
+    }
+
+    
 }

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block body %}
+  
+  <div id="slides">
+    1<img src="http://placehold.it/940x528">
+    2<img src="http://placehold.it/940x528">
+    2<img src="http://placehold.it/940x528">
+    2<img src="http://placehold.it/940x528">
+    <img src="http://placehold.it/940x528">
+  </div>
+
+     {% for post in posts %}
+        <h6><a href="{{path('post_show',{id:post.id,slug:post.slug})}}">Titre :{{post.title}}</a></h6>
+    {% endfor %}
+{% endblock body %}

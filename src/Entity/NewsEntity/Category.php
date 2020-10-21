@@ -1,7 +1,7 @@
 <?php
 namespace App\Entity\NewsEntity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\NewsRepository\CategoryRepository;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

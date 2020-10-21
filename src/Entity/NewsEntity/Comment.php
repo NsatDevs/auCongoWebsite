@@ -2,7 +2,7 @@
 
 namespace App\Entity\NewsEntity;
 
-use App\Repository\CommentRepository;
+use App\Repository\NewsRepository\CommentRepository;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
