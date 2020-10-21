@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\NewsEntity;
 
 use App\Repository\CommentRepository;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,12 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
      */
     private $post;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -69,6 +76,26 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of user
+     */ 
+    public function getUser():?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */ 
+    public function setUser(?User $user):self
+    {
+        $this->user = $user;
 
         return $this;
     }

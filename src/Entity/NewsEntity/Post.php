@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\NewsEntity;
 
 use App\Repository\PostRepository;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -151,12 +152,12 @@ class Post
         return $this;
     }
 
-    public function getPosted(): ?boolean
+    public function getPosted(): ?bool
     {
         return $this->posted;
     }
 
-    public function setPosted(?boolean $posted): self
+    public function setPosted(?bool $posted): self
     {
         $this->posted = $posted;
 
