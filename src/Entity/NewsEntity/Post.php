@@ -4,6 +4,7 @@ namespace App\Entity\NewsEntity;
 
 use App\Repository\PostRepository;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -46,7 +47,7 @@ class Post
     private $createdAt;
 
     /**
-     * @ORM\Column(type="bool")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $posted;
 
@@ -85,6 +86,7 @@ class Post
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->setCreatedAt= new DateTime();
     }
 
     public function getId(): ?int
