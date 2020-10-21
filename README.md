@@ -12,6 +12,7 @@ Ce nouveau site web remplace celui qui etait conçu en JOOMLA. Il utilise des te
  * Assurez-vous d'avoir <strong> git, composer et le binaire symfony</strong> dans votre machine. Sinon installez-le .
  * ouvrer votre terminal taper le commande suivante:<br> - git clone git@github.com:NsatDevs/auCongoWebsite.git <br>
                                                      - composer install<br>
+                                                     - symfony console doctrine:database:create <br>
                                                      - symfony console doctrine:fixtures:load --append <br>
                                                      - symfony server:start
 # 2. Comment partiper  à ce projet ?
