@@ -86,7 +86,7 @@ class Post
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->setCreatedAt= new DateTime();
+        $this->createdAt= new \DateTime();
     }
 
     public function getId(): ?int

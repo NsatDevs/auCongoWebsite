@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
 
              for ($i=0; $i <12 ; $i++) { 
                     $post->setTitle($faker->sentence)
-                         ->setDescription($faker->paragraphs(5))
+                         ->setDescription($faker->paragraph)
                          ->setImageName($faker->imageUrl())
                          ->setMediaSource('aucongo.news')
                          ->setVideoName($faker->imageUrl())
