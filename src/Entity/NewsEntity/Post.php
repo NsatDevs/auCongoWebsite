@@ -78,6 +78,11 @@ class Post
     private $comments;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private string $type;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="posts")
      */
     private $categories;
@@ -307,4 +312,24 @@ class Post
     }
 
     
+
+    /**
+     * Get the value of type
+     */ 
+    public function getType():?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the value of type
+     *
+     * @return  self
+     */ 
+    public function setType(?string $type): ?self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
 }

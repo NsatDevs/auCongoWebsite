@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/", name="post_index")
+     * @Route("/news", name="post_index")
      */
     public function index(PostRepository $repos)
     {

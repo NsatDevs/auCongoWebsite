@@ -29,6 +29,14 @@ class PostRepository extends ServiceEntityRepository
                      ->getQuery()
                      ->getResult();
     }
+     public function findByGlobal(){
+        return $this->findVisibleQuery()
+                    ->andWhere('p.type =:val')
+                    ->setParameter('val','global')
+                     ->setMaxResults(2)
+                     ->getQuery()
+                     ->getResult();
+    }
     
     private function findVisibleQuery()
     {

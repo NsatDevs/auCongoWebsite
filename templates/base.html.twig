@@ -3,30 +3,43 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-            /* Prevents slides from flashing */
-    <style>
-        #slides {
-        display:none;
-        }
-  </style>
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-            <script src="jquery.slides.min.js"></script>
+        {% block stylesheets %}
+         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}"/>
+            <link
+        rel="stylesheet"
+        href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}"
+        />
+        <link rel="stylesheet" href="{{asset('assets/vendors/aos/dist/aos.css/aos.css')}}" />
 
-            <script>
-                $(function(){
-                $("#slides").slidesjs({
-                    width: 940,
-                    height: 528
-                });
-                });
-            </script>
-  
+        <!-- End plugin css for this page -->
+        <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
+
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        
+        {% endblock %}
+           
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container-scroller">
+            <div class="main-panel">
+                {% include "partials/_navbar.html.twig" %}
+                {% block body %}
+                    <div class="content-wrapper"></div>
+                 {% endblock %}
+                  {% include "partials/_footer.html.twig" %}
+            </div>
+        </div>
+        
         {% block javascripts %}
-            
+            <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script src="{{asset('assets/vendors/aos/dist/aos.js/aos.js')}}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script src="{{asset('assets/js/demo.js')}}"></script>
+        <script src="{{asset('assets/js/jquery.easeScroll.js')}}"></script>
         {% endblock %}
     </body>
 </html>
