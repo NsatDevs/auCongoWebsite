@@ -1,0 +1,101 @@
+<?php
+
+namespace App\Controller\AdminController;
+
+use App\Entity\NewsEntity\Post;
+
+use App\Form\NewsForm\PostType;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\NewsRepository\PostRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+/**
+ * @Route("/post")
+ */
+class PostController extends AbstractController
+{
+    
+    /**
+     * @Route("/", name="candidat_post", methods={"GET"})
+     */
+    public function index(PostRepository $postRepository,Request $request): Response
+    {   $this->data=[
+        'page'=>$request->query->get('page',1),
+        'number'=>12
+             ];
+        $posts=$postRepository->searchPost($this->data);
+        return $this->render('post/home.html.twig', [
+            'posts' => $posts,
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="post_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('post_index');
+        }
+
+        return $this->render('post/new.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="post_show", methods={"GET"})
+     */
+    public function show(Post $post): Response
+    {
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="post_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Post $post): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('post_index');
+        }
+
+        return $this->render('post/edit.html.twig', [
+            'post' => $post,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="post_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Post $post): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($post);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('post_index');
+    }
+}

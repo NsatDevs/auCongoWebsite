@@ -4,8 +4,11 @@ namespace App\Repository\NewsRepository;
 
 use App\Entity\NewsEntity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,9 +18,22 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface $paginator|null
+     */
+    private PaginatorInterface $paginator;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private EntityManagerInterface $em;
+
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $em,PaginatorInterface $paginator)
     {
         parent::__construct($registry, Post::class);
+        $this->paginator=$paginator;
+        $this->em=$em;
+
     }
 
     /**
@@ -37,12 +53,43 @@ class PostRepository extends ServiceEntityRepository
                      ->getQuery()
                      ->getResult();
     }
-    
+
+    /**
+     * ceci retourne une pagination
+     * @return PaginationInterface
+     */
+    public function searchPost(array $data=[]):PaginationInterface{
+        $query=$this->findVisibleQuery()
+                    ->getQuery();
+        return $this->paginator->paginate($query,$data['page'],$data['number']);
+
+    }
+
+     /**
+     * ceci retourne une pagination
+     * @return PaginationInterface
+     */
+    public function searchPostByCategory(array $data=[]):PaginationInterface{
+         $query=$this->em->createQuery(
+                            'SELECT p
+                                FROM App\Entity\NewsEntity\Post p
+                                WHERE p.type > :val
+                                
+                                ORDER BY p.id ASC'
+                            )
+                            ->setParameter('val',$data['name'])
+                            ->getResult();
+        return $this->paginator->paginate($query,$data['page'],$data['number']);
+    }
     private function findVisibleQuery()
     {
 
         return $this->createQueryBuilder('p')
-              ->where('p.posted=true');
+              ->where('p.posted=true')
+              ->select('cat','p')
+              ->select('com','p')
+              ->join('p.categories','cat')
+              ->join('p.comments','com');
     }
 
     // /**
